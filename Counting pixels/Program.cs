@@ -1,7 +1,4 @@
 ﻿using Counting_pixels;
 using System.Drawing;
 
-DrawImage.DrawAndSaveImage();
-
-
-
+DrawImage.WriteStats(DrawImage.DrawAndSaveImage());
