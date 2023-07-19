@@ -12,8 +12,8 @@ namespace Counting_pixels
 {
     static class DrawImage
     {
-        private static int width = 3;
-        private static int height = 3;
+        private static int width = 5;
+        private static int height = 5;
         public static string path = $@"{(Environment.ProcessPath).Substring(0, Environment.ProcessPath.LastIndexOf('\\') + 1)}";
         public static Bitmap DrawAndSaveImage()
         {
@@ -57,7 +57,7 @@ namespace Counting_pixels
             {
                 for (int j = y + 1; j < bitmap.Height - 1; j++)
                 {
-                    if (Similarity.AreSimilar(bitmap.GetPixel(x, y), bitmap.GetPixel(i, j), 20))
+                    if (Similarity.AreSimilar(bitmap.GetPixel(x, y), bitmap.GetPixel(i, j), 5))
                     {
                         info.Coordinates.Add(new Coordinate(i, j));
                     }

@@ -24,12 +24,33 @@ namespace Counting_pixels
         public float y { get; set; }
         public float z { get; set; }
 
-        // конструктор от обычного цвета из Unity
+        //private static float LinearToSRGB(float channel)
+        //{
+        //    if (channel > 0.0031308f)
+        //    {
+        //        channel = 1.055f * MathF.Pow(channel, 1 / 2.4f) - 0.055f;
+        //    }
+        //    else
+        //    {
+        //        channel *= 12.92f;
+        //    }
+        //    return channel;
+        //}
+
+        //public static Color LinearToSRGB(Color col)
+        //{
+        //    Color rgbColor = Color.FromScRgb(
+        //            LinearToSRGB(col.R),
+        //            LinearToSRGB(col.G),
+        //            LinearToSRGB(col.B));
+        //    return
+        //        new Color(
+                    
+        //        );
+        //}
+
         public XYZ(Color col, Counting_pixels.Illuminant illuminant = Illuminant.D65)
         {
-            //, ColorUtility.Illuminant illuminant = ColorUtility.Illuminant.D65
-            // первым делом переводим цвет из linear RGB в sRGB с помощью
-            // метода, описанного выше
             float r = col.R;
             float g = col.G;
             float b = col.B;
