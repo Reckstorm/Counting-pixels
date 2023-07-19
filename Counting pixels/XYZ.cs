@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Counting_pixels.Models;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -24,36 +25,25 @@ namespace Counting_pixels
         public float y { get; set; }
         public float z { get; set; }
 
-        //private static float LinearToSRGB(float channel)
-        //{
-        //    if (channel > 0.0031308f)
-        //    {
-        //        channel = 1.055f * MathF.Pow(channel, 1 / 2.4f) - 0.055f;
-        //    }
-        //    else
-        //    {
-        //        channel *= 12.92f;
-        //    }
-        //    return channel;
-        //}
+        private static float LinearToSRGB(float channel) => channel / 255;
 
-        //public static Color LinearToSRGB(Color col)
-        //{
-        //    Color rgbColor = Color.FromScRgb(
-        //            LinearToSRGB(col.R),
-        //            LinearToSRGB(col.G),
-        //            LinearToSRGB(col.B));
-        //    return
-        //        new Color(
-                    
-        //        );
-        //}
+        public static ContainerSRGB LinearToSRGB(Color col)
+        {
+            return
+                new ContainerSRGB(
+                    LinearToSRGB(col.R),
+                    LinearToSRGB(col.G),
+                    LinearToSRGB(col.B)
+                );
+        }
 
         public XYZ(Color col, Counting_pixels.Illuminant illuminant = Illuminant.D65)
         {
-            float r = col.R;
-            float g = col.G;
-            float b = col.B;
+            ContainerSRGB sRGB = LinearToSRGB(col);
+
+            float r = sRGB.r;
+            float g = sRGB.g;
+            float b = sRGB.b;
 
             // в зависимости от стандарта выбираем матрицу и самую яркую точку
             // перемножаем матрицы "вручную", как было описано выше

@@ -12,12 +12,11 @@ namespace Counting_pixels
 {
     static class DrawImage
     {
-        private static int width = 5;
-        private static int height = 5;
         public static string path = $@"{(Environment.ProcessPath).Substring(0, Environment.ProcessPath.LastIndexOf('\\') + 1)}";
-        public static Bitmap DrawAndSaveImage()
+
+        public static Bitmap FillOutBitmap(int x, int y)
         {
-            Bitmap bitmap = new Bitmap(width, height);
+            Bitmap bitmap = new Bitmap(x, y);
             Random r = new Random();
             for (int i = 0; i < bitmap.Width; i++)
             {
@@ -28,9 +27,13 @@ namespace Counting_pixels
                     bitmap.SetPixel(i, k, color);
                 }
             }
+            return bitmap;
+        }
+
+        public static void SaveImage(Bitmap bitmap)
+        {
             if (File.Exists($"{path}Subject.png")) File.Delete($"{path}Subject.png");
             bitmap.Save($"{path}Subject.png");
-            return bitmap;
         }
 
         public static void WriteStats(Bitmap bitmap)
@@ -57,7 +60,7 @@ namespace Counting_pixels
             {
                 for (int j = y + 1; j < bitmap.Height - 1; j++)
                 {
-                    if (Similarity.AreSimilar(bitmap.GetPixel(x, y), bitmap.GetPixel(i, j), 5))
+                    if (Similarity.AreSimilar(bitmap.GetPixel(x, y), bitmap.GetPixel(i, j), 20))
                     {
                         info.Coordinates.Add(new Coordinate(i, j));
                     }
